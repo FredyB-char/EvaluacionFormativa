@@ -3,45 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Fredy Bohle Aros">
+    <meta name="author" content="Fredy Bohle">
+    <title>Portal Talento Escolar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>Matías López - Portal de Talentos</title>
 </head>
- <nav class="menu">
-    <section class="menu-izq">
-    <a href="index.html">Inicio</a>
-
-    </section>
-    <section>
-        <ul>
-            <li><a href="arte.html">Arte</a></li>
-            <li><a href="musica.html">Música</a></li>
-            <li><a href="tecnologia.html">Tecnología</a></li>
-        </ul>
-    </section>
-  </nav>
-<body class="contenido">
-    <header>
-        <h1>Ficha de Talento</h1>
-    </header>
-
-    <main>
-        <div>
-            <img src="/img/Matias.png" alt="Foto de Matías López" width="200">
-            <h2>Matías López</h2>
-            <ul>
-                <li><b>Edad:</b> 16 años</li>
-                <li><b>Talento:</b> Programación</li>
-            </ul>
-            <p>
-                Matías aprendió a programar a los 12 años de forma autodidacta. Domina HTML, CSS y JavaScript.
-                Ha creado varios proyectos web y participó en una hackathon escolar donde obtuvo el primer lugar.
-            </p>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fondo-azul">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="inicio.html">Talento Escolar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="inicio.html">Inicio</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categorias</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="arte.html">Arte</a></li>
+                            <li><a class="dropdown-item" href="musica.html">Música</a></li>
+                            <li><a class="dropdown-item" href="tecnologias.html">Tecnologías</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
+    <main>
+      
     </main>
-
-    <footer>
-        <p>Portal de Talentos Escolares &copy; 2026</p>
+    <footer class="text-center py-3 text-white fondo-azul">
+        <p class="mb-0">Talentos escolares &copy; 2026</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

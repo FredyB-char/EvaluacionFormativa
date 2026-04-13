@@ -1,41 +1,46 @@
-body {
-  margin: 0;
-  align-content: center;
-  text-align: center;
-  font-family: sans-serif;
+.fondo-azul {
+    background-color: #1a56db;
 }
-.menu {
-  background-color: #104d94;
+
+.contenedor-principal {
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 960px;
 }
-.menu-izq{
-  width: 50%;
+
+.titulo {
+    color: #1a56db;
 }
-.menu-der{
-    width: 50%;
-    justify-content: flex-end;
+
+.tarjeta {
+    border: 2px solid #1a56db !important;
 }
-.menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
+
+.img-tarjeta {
+    height: 220px;
+    object-fit: cover;
 }
-.menu a {
-  display: block;
-  padding: 15px 20px;
-  color: rgb(191, 191, 191);
-  text-decoration: none;
-  transition: background 0.3s;
+
+.btn-azul {
+    background-color: #1a56db;
+    color: #fff;
 }
-.menu a:hover {
-  color: rgb(255, 255, 255);
+
+.btn-azul:hover {
+    background-color: #1544b5;
+    color: #fff;
 }
-.contenido {
-  min-height: calc(100vh - 60px);
+
+.img-carousel {
+    height: 400px;
+    object-fit: cover;
 }
-footer {
-  background-color: #222;
-  color: white;
-  text-align: center;
-  padding: 10px;
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    display: inline-block;
+    bottom: 1.5rem;
 }
