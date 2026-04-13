@@ -44,3 +44,12 @@
     display: inline-block;
     bottom: 1.5rem;
 }
+section {
+  background-color: #f8f9fa;
+  padding: 60px 20px;
+  border-radius: 10px;
+}
+
+h1 {
+  color: #0d6efd;
+}
