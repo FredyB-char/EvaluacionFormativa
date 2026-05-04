@@ -13,6 +13,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/styles.css" />
+    <script type="text/javascript" src="../js/script.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark fondo-azul sticky-top">
@@ -64,7 +65,7 @@
             <h3 class="mb-4 text-center">Solicitud inscripción de talento</h3>
 
             <form
-              id="RegistroTalento"
+              id="registroTalento"
               class="needs-validation"
               method="post"
               novalidate
@@ -72,7 +73,7 @@
               <ul class="nav nav-tabs mb-3">
                 <li class="nav-item">
                   <button
-                    class="nav-link active"
+                    class="nav-link form-btn active"
                     id="tab1-btn"
                     data-bs-toggle="tab"
                     data-bs-target="#tabEstudiante"
@@ -82,20 +83,22 @@
                 </li>
                 <li class="nav-item">
                   <button
-                    class="nav-link"
+                    class="nav-link form-btn"
                     id="tab2-btn"
                     data-bs-toggle="tab"
                     data-bs-target="#tabTalento"
+                    disabled
                   >
                     Talento
                   </button>
                 </li>
                 <li class="nav-item">
                   <button
-                    class="nav-link"
+                    class="nav-link form-btn"
                     id="tab3-btn"
                     data-bs-toggle="tab"
                     data-bs-target="#tabApoderado"
+                    disabled
                   >
                     Apoderado
                   </button>
@@ -110,6 +113,7 @@
                         type="text"
                         class="form-control"
                         id="nombre"
+                        placeholder="Nombre"
                         required
                       />
                       <label for="nombre">Nombre</label>
@@ -120,6 +124,7 @@
                         type="text"
                         class="form-control"
                         id="apellido"
+                        placeholder="Apellido"
                         required
                       />
                       <label for="apellido">Apellido</label>
@@ -133,6 +138,7 @@
                       id="edad"
                       min="5"
                       max="19"
+                      placeholder="Edad"
                       required
                     />
                     <label for="edad">Edad</label>
@@ -165,11 +171,11 @@
                   <div class="form-floating mb-3">
                     <select class="form-select" id="categoria" required>
                       <option value="">Seleccionar</option>
-                      <option value="">Artes</option>
-                      <option value="">Música</option>
-                      <option value="">Tecnología</option>
-                      <option value="">Deporte</option>
-                      <option value="">Ciencias</option>
+                      <option value="artes">Artes</option>
+                      <option value="musica">Música</option>
+                      <option value="tecnologia">Tecnología</option>
+                      <option value="deporte">Deporte</option>
+                      <option value="ciencias">Ciencias</option>
                     </select>
                     <label for="categoria">Categoría</label>
                   </div>
@@ -193,12 +199,11 @@
                   </div>
 
                   <div class="mb-3">
-                    <label class="form-label">Sube evidencia</label>
+                    <label class="form-label">Sube evidencia(opcional)</label>
                     <input
                       type="file"
                       class="form-control"
                       accept="image/*,video/*,audio/*"
-                      required
                     />
                   </div>
 
@@ -225,7 +230,6 @@
                       type="text"
                       class="form-control"
                       id="apoderado"
-                      placeholder="Nombre del apoderado"
                       required
                     />
                     <label for="apoderado">Nombre del apoderado</label>
@@ -236,7 +240,6 @@
                       type="email"
                       class="form-control"
                       id="correoApoderado"
-                      placeholder="Correo del Apoderado"
                       required
                     />
                     <label for="correoApoderado">Correo del apoderado</label>
@@ -247,7 +250,6 @@
                       type="tel"
                       class="form-control"
                       id="telefonoApoderado"
-                      placeholder="Teléfono del apoderado"
                       required
                     />
                     <label for="telefonoApoderado"
@@ -279,7 +281,12 @@
                     >
                       Volver
                     </button>
-                    <button type="submit" class="btn btn-success w-50">
+
+                    <div id="mensajeExito" class="alert alert-success d-none" role="alert">
+                      Solicitud enviada correctamente. Nos pondremos en contacto contigo.
+                    </div>
+
+                    <button type="submit" id="btn-enviar" class="btn btn-success w-50">
                       Enviar
                     </button>
                   </div>
