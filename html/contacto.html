@@ -65,70 +65,83 @@
 
             <form>
                 <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder="nombre">
-                <label for="floatingInput">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="nombre">
+                  <label for="nombre">Nombre</label>
                 </div>
+
                 <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="nombre@ejemplo.com">
-                <label for="floatingInput">Correo Electrónico</label>
+                  <input type="text" class="form-control" id="apellido" placeholder="Apellido" required>
+                  <label for="Apellido">Apellido</label>
+                </div>
+                
+                  <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="fecha">
+                    <label for="fecha">Fecha de Nacimiento</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                  <select class="form-select" id="curso" required>
+                    <option selected>Seleccionar</option>
+                    <option>1° Básico</option>
+                    <option>2° Básico</option>
+                    <option>3° Básico</option>
+                    <option>4° Básico</option>
+                    <option>5° Básico</option>
+                    <option>6° Básico</option>
+                    <option>7° Básico</option>
+                    <option>8° Básico</option>
+                    <option>1° Medio</option>
+                    <option>2° Medio</option>
+                    <option>3° Medio</option>
+                    <option>4° Medio</option>
+                  </select>
+                  <label for="curso">Curso</label>
                 </div>
 
               <div class="form-floating">
-                <select class="form-select" id="floatingSelect" aria-label="">
+                <select class="form-select" id="categoria" aria-label="">
                     <option selected>Seleccionar</option>
                     <option value="1">Artes</option>
                     <option value="2">Música</option>
                     <option value="3">Técnologia</option>
                 </select>
-                <label for="floatingSelect">Categoria</label>
+                <label for="categoria">Categoria</label>
                 </div>
-                            <div class="mb-3">
-                <label class="form-label">Sexo</label>
-
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="sexo"
-                    id="masculino"
-                    value="masculino"
-                    required
-                  />
-                  <label class="form-check-label" for="masculino">
-                    Masculino
-                  </label>
-                </div>
-
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="sexo"
-                    id="femenino"
-                    value="femenino"
-                  />
-                  <label class="form-check-label" for="femenino">
-                    Femenino
-                  </label>
-                </div>
-
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="sexo"
-                    id="otro"
-                    value="otro"
-                  />
-                  <label class="form-check-label" for="otro"> Otro </label>
-                </div>
-              </div>
-              <div class="mb-3">
+                  <div class="mb-3">
+                    <label class="form-label">Nivel percibido</label>
+                    <input type="range" class="form-range" min="1" max="5" id="nivel">
+                    <small>1 = Inicial | 5 = Muy avanzado</small>
+                  </div>
+                                <div class="mb-3">
                 <label class="form-label">Descripción Talento</label>
                 <textarea class="form-control" rows="3"></textarea>
               </div>
+                        <div class="mb-3">
+                      <label class="form-label">Sube evidencia</label>
+                      <input type="file" class="form-control" accept="image/*,video/*,audio/*" required>
+                    </div>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="apoderado" placeholder="nombre del apoderado" required>
+                        <label for="apoderado">Nombre del apoderado</label>
+                      </div>
 
+              <div class="form-floating mb-3">
+                <input type="tel" class="form-control" id="telefonoApoderado" placeholder="Teléfono" required>
+                <label for="telefonoApoderado">Teléfono</label>
+              </div>
+              
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="correo" placeholder="nombre@ejemplo.com" required>
+                  <label for="correo">Correo Electrónico</label>
+                </div>
 
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="autorizacion" required>
+                <label class="form-check-label" for="autorizacion">
+                  Autorizo el uso de datos y material
+                </label>
+              </div>
+
+              <div class="form-floating mb-3">
               <button type="submit" class="btn btn-primary w-100">
                 Enviar
               </button>
