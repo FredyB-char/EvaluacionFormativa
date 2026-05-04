@@ -67,7 +67,6 @@
             <form
               id="registroTalento"
               class="needs-validation"
-              method="post"
               novalidate
             >
               <ul class="nav nav-tabs mb-3">
@@ -195,7 +194,7 @@
 
                   <div class="mb-3">
                     <label class="form-label">Descripción</label>
-                    <textarea class="form-control" rows="3" required></textarea>
+                    <textarea class="form-control" id="descripcion" rows="3" required></textarea>
                   </div>
 
                   <div class="mb-3">
@@ -281,12 +280,7 @@
                     >
                       Volver
                     </button>
-
-                    <div id="mensajeExito" class="alert alert-success d-none" role="alert">
-                      Solicitud enviada correctamente. Nos pondremos en contacto contigo.
-                    </div>
-
-                    <button type="submit" id="btn-enviar" class="btn btn-success w-50">
+                    <button type="submit" id="btn-enviar" class="btn btn-success w-50" disabled>
                       Enviar
                     </button>
                   </div>
@@ -305,5 +299,20 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <p class="mb-3">Su Solicitud ha sido enviada correctamente.</p>
+            <div class="d-flex justify-content-center gap-2">
+              <button type="button" id="btnConfirmar" class="btn btn-success btn-sm">
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
   </body>
 </html>

@@ -1,6 +1,3 @@
-  const form = document.getElementById("registroTalento");
-  const modal = new bootstrap.Modal(document.getElementById("modalExito"));
-
 function validacionPaso(tabSelector) {
   const tab = document.querySelector(tabSelector);
   const entradas = tab.querySelectorAll("input, select, textarea");
@@ -10,9 +7,12 @@ function validacionPaso(tabSelector) {
   entradas.forEach(entrada => {
     if (!entrada.checkValidity()) {
       entrada.classList.add("is-invalid");
+      entrada.classList.remove("is-valid");
+
       validez = false;
     } else {
       entrada.classList.remove("is-invalid");
+      entrada.classList.add("is-valid");
     }
   });
   return validez;
@@ -33,7 +33,13 @@ function irHacia(tabBtnId, tabId){
 }
 
 document.addEventListener("DOMContentLoaded", () =>{
+    const formulario = document.getElementById("registroTalento");
+    const btnEnviar = document.getElementById("btn-enviar");
+    const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
+    const btnConfirmar = document.getElementById("btnConfirmar");
 
+    let datosValidos = false;
+    
     // Avanzar 
     document.getElementById("next1").addEventListener("click", () => {
         if (!validacionPaso("#tabEstudiante")) return;
@@ -56,5 +62,38 @@ document.addEventListener("DOMContentLoaded", () =>{
         irHacia("tab2-btn","tabTalento");
     });
 
-    // submit
+    // validacion completa
+    const validarFormulario = () => {
+        btnEnviar.disabled = !formulario.checkValidity();
+    };
+
+    formulario.addEventListener("input", validarFormulario);
+    formulario.addEventListener("change", validarFormulario);
+    
+        // submit
+    formulario.addEventListener("submit", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!formulario.checkValidity()) {
+      formulario.classList.add("is-valid");
+      return;
+    }
+
+    datosValidos = true;
+    modal.show();
+  });
+  btnConfirmar.addEventListener("click", () => {
+    if (!datosValidos) return;
+
+    modal.hide();
+
+    formulario.reset();
+    formulario.classList.remove("is-valid");
+    document.getElementById("tab2-btn").disabled = true;
+    document.getElementById("tab3-btn").disabled = true;
+    
+    btnEnviar.disabled = true;
+    document.querySelector("#tab1-btn")?.click();
+  });
 });
