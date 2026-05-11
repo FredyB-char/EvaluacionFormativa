@@ -1,99 +1,200 @@
-function validacionPaso(tabSelector) {
-  const tab = document.querySelector(tabSelector);
-  const entradas = tab.querySelectorAll("input, select, textarea");
+$(document).ready(function () {
+    const $formulario = $("#registroTalento");
+    const $btnEnviar = $("#btn-enviar");
 
-  let validez = true;
+    const modal = new bootstrap.Modal(
+        $("#modalConfirmacion")[0]
+    );
 
-  entradas.forEach(entrada => {
-    if (!entrada.checkValidity()) {
-      entrada.classList.add("is-invalid");
-      entrada.classList.remove("is-valid");
+    const reglas_Validacion = {
+        nombre: {
+            presence: {
+                allowEmpty: false,
+                message: "es obligatorio"
+            },
+            length: {
+                minimum: 2,
+                message: "debe tener al menos 2 caracteres"
+            }
+        },
 
-      validez = false;
-    } else {
-      entrada.classList.remove("is-invalid");
-      entrada.classList.add("is-valid");
-    }
-  });
-  return validez;
-}
+        apellido: {
+            presence: {
+                allowEmpty: false,
+                message: "es obligatorio"
+            }
+        },
 
-function irHacia(tabBtnId, tabId){
-    document.querySelectorAll(".form-btn").forEach(btn =>{
-        btn.classList.remove("active");
-    });
-    const btn = document.getElementById(tabBtnId);
-    btn.classList.add("active");
+        edad: {
+            presence: true,
+            numericality: {
+                greaterThanOrEqualTo: 5,
+                lessThanOrEqualTo: 19,
+                message: "debe estar entre 5 y 19"
+            }
+        },
 
-    document.querySelectorAll(".tab-pane").forEach(panel =>{
-        panel.classList.remove("show","active");
-    });
-    const panel = document.getElementById(tabId);
-    panel.classList.add("show","active");
-}
+        curso: {
+            presence: {
+                allowEmpty: false,
+                message: "debe seleccionar un curso"
+            }
+        },
 
-document.addEventListener("DOMContentLoaded", () =>{
-    const formulario = document.getElementById("registroTalento");
-    const btnEnviar = document.getElementById("btn-enviar");
-    const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
-    const btnConfirmar = document.getElementById("btnConfirmar");
+        categoria: {
+            presence: {
+                allowEmpty: false,
+                message: "debe seleccionar una categoría"
+            }
+        },
 
-    let datosValidos = false;
-    
-    // Avanzar 
-    document.getElementById("next1").addEventListener("click", () => {
-        if (!validacionPaso("#tabEstudiante")) return;
-        document.getElementById("tab2-btn").disabled = false;
-        irHacia("tab2-btn","tabTalento");
-    });
+        descripcion: {
+            presence: true,
+            length: {
+                minimum: 10,
+                message: "debe tener mínimo 10 caracteres"
+            }
+        },
 
-    document.getElementById("next2").addEventListener("click", () => {
-        if (!validacionPaso("#tabTalento")) return;
-        document.getElementById("tab3-btn").disabled = false;
-        irHacia("tab3-btn","tabApoderado");
-    });
+        apoderado: {
+            presence: true
+        },
 
-    // volver
-    document.getElementById("back2").addEventListener("click", () => {
-        irHacia("tab1-btn","tabEstudiante");
-    });
+        correoApoderado: {
+            presence: true,
+            email: {
+                message: "no es válido"
+            }
+        },
 
-    document.getElementById("back3").addEventListener("click", () => {
-        irHacia("tab2-btn","tabTalento");
-    });
-
-    // validacion completa
-    const validarFormulario = () => {
-        btnEnviar.disabled = !formulario.checkValidity();
+        telefonoApoderado: {
+            presence: true,
+            format: {
+                pattern: "^[0-9+ ]+$",
+                message: "solo puede contener números"
+            }
+        }
     };
 
-    formulario.addEventListener("input", validarFormulario);
-    formulario.addEventListener("change", validarFormulario);
-    
-        // submit
-    formulario.addEventListener("submit", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    function mostrarError($input, errores) {
 
-    if (!formulario.checkValidity()) {
-      formulario.classList.add("is-valid");
-      return;
+        $input.removeClass("is-valid");
+        $input.addClass("is-invalid");
+
+        let $feedback = $input.siblings(".invalid-feedback");
+
+        if (!$feedback.length) {
+            $feedback = $("<div>")
+                .addClass("invalid-feedback");
+            $input.after($feedback);
+        }
+
+        $feedback.text(errores[0]);
     }
 
-    datosValidos = true;
-    modal.show();
-  });
-  btnConfirmar.addEventListener("click", () => {
-    if (!datosValidos) return;
+    function mostrarValido($input) {
+        $input.removeClass("is-invalid");
+        $input.addClass("is-valid");
+    }
 
-    modal.hide();
+    function validarInput(input) {
 
-    formulario.reset();
-    formulario.classList.remove("is-valid");
-    document.getElementById("tab2-btn").disabled = true;
-    document.getElementById("tab3-btn").disabled = true;
-    
-    btnEnviar.disabled = true;
-    document.querySelector("#tab1-btn")?.click();
-  });
+        const $input = $(input);
+        const nombre = $input.attr("id");
+        const valor = $input.val();
+        const valores_formulario = {};
+        valores_formulario[nombre] = valor;
+
+        const reglas = {};
+        reglas[nombre] = reglas_Validacion[nombre];
+        const errores = validate(valores_formulario, reglas);
+
+        if (errores) {
+            mostrarError($input, errores[nombre]);
+            return false;
+        }
+        mostrarValido($input);
+        return true;
+    }
+
+
+    function validarFormulario() {
+        let valido = true;
+
+        $("input, select, textarea").each(function () {
+            if (!validarInput(this)) {
+                valido = false;
+            }
+        });
+
+        $btnEnviar.prop("disabled", !valido);
+        return valido;
+    }
+
+
+    function cambiarTab(tabId) {
+        const tab = new bootstrap.Tab($(tabId)[0]);
+        tab.show();
+    }
+
+
+    $("input, select, textarea").on("blur change", function () {
+        validarInput(this);
+        validarFormulario();
+    });
+
+
+    $("#next1").click(function () {
+        const ok =
+            validarInput($("#nombre")) &
+            validarInput($("#apellido")) &
+            validarInput($("#edad")) &
+            validarInput($("#curso"));
+
+        if (!ok) return;
+        $("#tab2-btn").prop("disabled", false);
+
+        cambiarTab("#tab2-btn");
+    });
+
+    $("#next2").click(function () {
+
+        const ok =
+            validarInput($("#categoria")) &
+            validarInput($("#descripcion"));
+
+        if (!ok) return;
+        $("#tab3-btn").prop("disabled", false);
+        cambiarTab("#tab3-btn");
+    });
+
+    $("#back2").click(function () {
+        cambiarTab("#tab1-btn");
+    });
+
+    $("#back3").click(function () {
+        cambiarTab("#tab2-btn");
+    });
+
+    $formulario.submit(function (e) {
+        e.preventDefault();
+        if (!validarFormulario()) return;
+        modal.show();
+    });
+
+
+    $("#btnConfirmar").click(function () {
+        modal.hide();
+        $formulario[0].reset();
+
+        $(".form-control, .form-select")
+        .removeClass("is-valid is-invalid");
+        $(".invalid-feedback").remove();
+        $("#tab2-btn, #tab3-btn")
+        .prop("disabled", true);
+
+        $btnEnviar.prop("disabled", true);
+        cambiarTab("#tab1-btn");
+    });
+
 });
